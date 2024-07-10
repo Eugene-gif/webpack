@@ -1,4 +1,4 @@
 import { calc } from "./test";
 
 console.log('Hello world!!!');
-console.log(calc(2, 7));
+console.log(calc(20, 7));
