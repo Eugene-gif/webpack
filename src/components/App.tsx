@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useState} from 'react';
+import './App.scss';
 
 export const App = () => {
   const [count, setCount] = useState<number>(0);
