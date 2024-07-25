@@ -1,0 +1,14 @@
+.button {
+  background-color: red;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+
+  @media (hover:hover) and (pointer: fine) {
+    cursor: pointer;
+  }
+}
+
+.heading {
+  font-size: 52px;
+}
