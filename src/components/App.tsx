@@ -20,7 +20,7 @@ export const App = () => {
 
   const increment = () => setCount(prev => prev + 1);
 
-  todo(1);
+  // todo(1);
   // if(__PLATFORM__ === 'desktop') {
   //   return <div>Is Desktop Platform</div>
   // }
@@ -50,7 +50,7 @@ export const App = () => {
       </div>
       <div>
         <PenguinSvg width={100} height={100}/>
-        <ReactSvg color={'red'} width={100} height={100}/>
+        <ReactSvg color={'lightblue'} width={100} height={100}/>
         <JsSvg color={'#efd81d'} width={100} height={100}/>
         <HtmlSvg color={'#e96228'} width={100} height={100}/>
       </div>

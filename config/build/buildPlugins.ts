@@ -4,6 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
 // TODO: Деструктурировать можно как таким образом как здесь, так и явным const {mode, paths} = options; как в buildWebpack.ts
 export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions): Configuration['plugins'] {
@@ -22,6 +23,7 @@ export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions):
     plugins.push(new webpack.ProgressPlugin());
     // Выносим проверку типов в отдельный процесс, не нагружая сборку
     plugins.push(new ForkTsCheckerWebpackPlugin());
+    plugins.push(new ReactRefreshWebpackPlugin())
   }
 
   if(isProd) {
