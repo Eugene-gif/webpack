@@ -11,7 +11,7 @@ import ReactSvg from '@/assets/react-16.svg';
 import JsSvg from '@/assets/js.svg';
 import HtmlSvg from '@/assets/html.svg';
 
-function todo() {
+function todo(a: number) {
   console.log('todo function');
 }
 
@@ -20,7 +20,7 @@ export const App = () => {
 
   const increment = () => setCount(prev => prev + 1);
 
-  // todo();
+  todo(1);
   // if(__PLATFORM__ === 'desktop') {
   //   return <div>Is Desktop Platform</div>
   // }

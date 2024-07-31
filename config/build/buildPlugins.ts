@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import { platform } from 'os';
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 // TODO: Деструктурировать можно как таким образом как здесь, так и явным const {mode, paths} = options; как в buildWebpack.ts
 export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions): Configuration['plugins'] {
@@ -15,11 +15,13 @@ export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions):
     new DefinePlugin({
       __PLATFORM__: JSON.stringify(platform),
       __ENV__: JSON.stringify(mode),
-    })
+    }),
   ];
 
   if(isDev) {
-    plugins.push(new webpack.ProgressPlugin())
+    plugins.push(new webpack.ProgressPlugin());
+    // Выносим проверку типов в отдельный процесс, не нагружая сборку
+    plugins.push(new ForkTsCheckerWebpackPlugin());
   }
 
   if(isProd) {
