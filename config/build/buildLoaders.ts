@@ -81,12 +81,34 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     ],
   }
 
+  const babelLoader =  {
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    use: {
+      loader: "babel-loader",
+      // TODO: Объект options при необходимости можно перенести в корневой файл babel.config.json, например для jest
+      options: {
+        presets: [
+          "@babel/preset-env", 
+          "@babel/preset-typescript",
+          [
+            "@babel/preset-react", 
+            {
+              runtime: isDev ? 'automatic' : 'classic',
+            }
+          ]
+        ]
+      }
+    }
+  }
+
 
   return [
     // порядок имеет значение
     assetLoader,
     scssLoader, 
-    tsLoader,
+    // tsLoader,
+    babelLoader,
     svgrLoader
   ]
 }
