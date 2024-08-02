@@ -11,14 +11,21 @@ import ReactSvg from '@/assets/react-16.svg';
 import JsSvg from '@/assets/js.svg';
 import HtmlSvg from '@/assets/html.svg';
 
-function todo(a: number) {
-  console.log('todo function');
+function todo() {
+  todo2();
+}
+
+function todo2() {
+  throw new Error();
 }
 
 export const App = () => {
   const [count, setCount] = useState<number>(0);
 
-  const increment = () => setCount(prev => prev + 1);
+  const increment = () => {
+    // setCount(prev => prev + 1)
+    todo();
+  };
 
   // todo(1);
   // if(__PLATFORM__ === 'desktop') {
