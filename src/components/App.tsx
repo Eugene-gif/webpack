@@ -38,9 +38,9 @@ export const App = () => {
   // }
 
   return (
-    <div>
-      <h1>PLATFORM: {__PLATFORM__}</h1>
-      <h3>ENV: {__ENV__ === 'development' ? 'Is dev version' : 'Is prod version'}</h3>
+    <div data-testid={'dataTest.App'}>
+      <h1 data-testid={'dataTest.Platform'}>PLATFORM: {__PLATFORM__}</h1>
+      <h3 data-testid={'dataTest.ENV'}>ENV: {__ENV__ === 'development' ? 'Is dev version' : 'Is prod version'}</h3>
       <div>
         <img src={catPng} width={200} height={200} alt='cat'/>
         <img src={catAvif} width={300} height={200} alt='cat'/>

@@ -1,7 +1,8 @@
 import { ModuleOptions } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { BuildOptions } from './types/types';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
+import { BuildOptions } from './types/types';
+import { buildBabelLoader } from './babel/buildBabelLoader';
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
   const isDev = options.mode === 'development';
@@ -54,14 +55,6 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     ],
   }
 
-  // const tsLoader = {
-  //   // ts-loader умеет работать с JSX
-  //   // Если бы мы не использовали ts, то нужен был бы babel-loader
-  //   test: /\.tsx?$/,
-  //   use: 'ts-loader',
-  //   exclude: /node_modules/,
-  // }
-
   const tsLoader = {
     // ts-loader умеет работать с JSX
     // Если бы мы не использовали ts, то нужен был бы babel-loader
@@ -81,26 +74,27 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     ],
   }
 
-  const babelLoader =  {
-    test: /\.tsx?$/,
-    exclude: /node_modules/,
-    use: {
-      loader: "babel-loader",
-      // TODO: Объект options при необходимости можно перенести в корневой файл babel.config.json, например для jest
-      options: {
-        presets: [
-          "@babel/preset-env", 
-          "@babel/preset-typescript",
-          [
-            "@babel/preset-react", 
-            {
-              runtime: isDev ? 'automatic' : 'classic',
-            }
-          ]
-        ]
-      }
-    }
-  }
+  const babelLoader = buildBabelLoader(options);
+  // {
+  //   test: /\.tsx?$/,
+  //   exclude: /node_modules/,
+  //   use: {
+  //     loader: "babel-loader",
+  //     // TODO: Объект options при необходимости можно перенести в корневой файл babel.config.json, например для jest
+  //     options: {
+  //       presets: [
+  //         "@babel/preset-env", 
+  //         "@babel/preset-typescript",
+  //         [
+  //           "@babel/preset-react", 
+  //           {
+  //             runtime: isDev ? 'automatic' : 'classic',
+  //           }
+  //         ]
+  //       ]
+  //     }
+  //   }
+  // }
 
 
   return [
